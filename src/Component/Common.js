@@ -1,4 +1,26 @@
-exports.wordCount = async () => {
+const postApi = async (url, data, post) => {
+ try {
+   const apiURL = "http://localhost:9000/";
+   const response = await fetch(apiURL + url, {
+     method: post,
+     headers: {
+       "Content-Type": "application/json",
+     },
+     body: JSON.stringify(data),
+   });
+
+   if (!response.ok) {
+     throw new Error(`HTTP error! Status: ${response.status}`);
+   }
+   const responseData = await response.json();
+   return responseData;
+ } catch (error) {
+   console.error(error);
+ }
+};
+
+const api = {
+wordCount: async () => {
     try{
   let url = document.getElementById("basic-url").value;
   if (url.length > 8) {
@@ -19,30 +41,9 @@ exports.wordCount = async () => {
 } catch (error) {
     console.error(error);
   }
-};
+},
 
-const postApi = async (url, data, post) => {
-  try {
-    const apiURL = "http://localhost:9000/";
-    const response = await fetch(apiURL + url, {
-      method: post,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const responseData = await response.json();
-    return responseData;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-exports.fetchData = async () => {
+fetchData: async () => {
   try {
     let apiurl = "geturlhistory/READ";
     let data = {};
@@ -51,9 +52,9 @@ exports.fetchData = async () => {
   } catch (error) {
     console.log(error);
   }
-};
+},
 
-exports.addToFavourite = async (id) => {
+addToFavourite: async (id) => {
   try {
     let apiurl = "geturlhistory/UPDATE";
     let data = {
@@ -69,9 +70,9 @@ exports.addToFavourite = async (id) => {
   } catch (error) {
     console.log(error);
   }
-};
+},
 
-exports.deleteURL = async (id) => {
+deleteURL: async (id) => {
   try {
     let apiurl = "geturlhistory/DELETE";
     let data = {
@@ -86,4 +87,6 @@ exports.deleteURL = async (id) => {
   } catch (error) {
     console.log(error);
   }
-};
+}
+}
+export default api;
