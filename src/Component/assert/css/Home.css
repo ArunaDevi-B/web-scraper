@@ -1,0 +1,23 @@
+:root{
+    --main-bg:#15125a;
+  }
+  
+  .main-bg {
+    background: var(--main-bg) !important;
+  }
+  
+  input:focus, button:focus {
+    border: 1px solid var(--main-bg) !important;
+    box-shadow: none !important;
+  }
+  .card, .btn, input{
+    border-radius:0 !important;
+  }
+  .container{
+    vertical-align: middle;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
